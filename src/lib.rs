@@ -34,16 +34,16 @@
 #![no_std]
 #![deny(missing_docs)]
 
-#[cfg(feature="serde")]
+#[cfg(feature = "serde")]
 extern crate serde;
 
-#[cfg(feature="std")]
+#[cfg(feature = "std")]
 extern crate std;
 
 use core::cmp;
 use core::fmt;
-use core::mem;
 use core::hash;
+use core::mem;
 use core::str;
 
 mod simd;
@@ -60,13 +60,13 @@ pub struct Sha1 {
     len: u64,
 }
 
-struct Blocks {
+pub struct Blocks {
     len: u32,
     block: [u8; 64],
 }
 
 #[derive(Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash, Default)]
-struct Sha1State {
+pub struct Sha1State {
     state: [u32; 5],
 }
 
