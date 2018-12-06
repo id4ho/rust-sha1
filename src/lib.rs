@@ -60,14 +60,16 @@ pub struct Sha1 {
     len: u64,
 }
 
-pub struct Blocks {
+struct Blocks {
     len: u32,
     block: [u8; 64],
 }
 
+/// The current digest state of a Sha1
 #[derive(Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash, Default)]
 pub struct Sha1State {
-    state: [u32; 5],
+    /// Self-explanatory
+    pub state: [u32; 5],
 }
 
 /// Digest generated from a `Sha1` instance.
@@ -111,6 +113,18 @@ impl Sha1 {
         Sha1 {
             state: DEFAULT_STATE,
             len: 0,
+            blocks: Blocks {
+                len: 0,
+                block: [0; 64],
+            },
+        }
+    }
+
+    /// Creates a sha1 hash object with a given state.
+    pub fn new_with_state_and_len(state: Sha1State, len: u64) -> Sha1 {
+        Sha1 {
+            state,
+            len,
             blocks: Blocks {
                 len: 0,
                 block: [0; 64],
